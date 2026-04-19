@@ -1,25 +1,40 @@
-import asyncio, random, hashlib, sys, os, requests, re
+import asyncio, random, hashlib, sys, os, requests, re, time
 from telethon import TelegramClient, events, errors
 
-# --- 🎨 ANSI কালার প্যালেট ---
+# --- 🎨 কালার ও অ্যানিমেশন ---
 G, Y, R, C, W, B = '\033[92m', '\033[93m', '\033[91m', '\033[96m', '\033[0m', '\033[1m'
+
+def slow_print(text, speed=0.002):
+    for c in text:
+        print(c, end='', flush=True)
+        time.sleep(speed)
+    print()
 
 def show_banner():
     os.system('clear')
-    print(f"""{C}{B}
-  __  __      _____ _   _ _____ _____  ______ _____  
-  \\ \\/ /     / ____| \\ | |_   _|  __ \\|  ____|  __ \\ 
-   \\  /_____| (___ |  \\| | | | | |__) | |__  | |__) |
-   /  \\______|___ \\| . ` | | | |  ___/|  __| |  _  / 
-  / /\\ \\     ____) | |\\  |_| |_| |    | |____| | \\ \\ 
- /_/  \\_\\   |_____/|_| \\_|_____|_|    |______|_|  \\_\\
-{Y}         [+] Version: 3.0 | Master Precision [+]
-{G}         [+] Developer: ASYASIRARAFAT           [+]
-{C}============================================================={W}""")
+    banner = f"""
+{Y} ██╗  ██╗     ██████╗ ███╗   ██╗██╗██████╗ ███████╗██████╗ 
+ \033[93m╚██╗██╔╝    ██╔════╝ ████╗  ██║██║██╔══██╗██╔════╝██╔══██╗
+  \033[93m╚███╔╝     ╚█████╗  ██╔██╗ ██║██║██████╔╝█████╗  ██████╔╝
+  \033[93m██╔██╗      ╚═══██╗ ██║╚██╗██║██║██╔═══╝ ██╔══╝  ██╔══██╗
+ \033[93m██╔╝ ██╗    ██████╔╝ ██║ ╚████║██║██║     ███████╗██║  ██║
+ \033[93m╚═╝  ╚═╝    ╚═════╝  ╚═╝  ╚═══╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
-def show_menu():
-    print(f"{G}[ 1 ] {W}Start Sniper Attack\n{G}[ 2 ] {W}Check HWID\n{G}[ 3 ] {W}Update Tool\n{R}[ X ] {W}Exit")
-    print(f"{C}-------------------------------------------------------------{W}")
+{R}              v3.0 Premium UI (Laser Precision)
+
+{C}═════════════════════════════════════════════════════════════
+{G}           The Best AI Sniper for Telegram
+{C}═════════════════════════════════════════════════════════════
+
+{G}[ 1 ]{W} Start Sniper Engine     {R}[ Fast Execution ]
+{G}[ 2 ]{W} Check Hardware ID       {R}[ HWID Security ]
+{G}[ 3 ]{W} Update Sniper Tool      {R}[ Auto Git Pull ]
+{G}[ 4 ]{W} Contact Developer       {R}[ Support ]
+{R}[ X ]{W} Exit Sniper Bot
+
+{C}═════════════════════════════════════════════════════════════
+"""
+    slow_print(banner)
 
 # --- 🔐 সিকিউরিটি ---
 RAW_LINK = "https://raw.githubusercontent.com/ASYASIRARAFAT/x-sniper-bot/main/approved.txt"
@@ -33,23 +48,27 @@ def get_hwid():
 def verify():
     show_banner()
     uid = get_hwid()
-    print(f"{Y}🔍 ভেরিফাই করা হচ্ছে...{W}\n🔑 HWID: {uid}")
+    slow_print(f"{Y}🔍 Authorization: Checking HWID...{W}")
+    print(f"🔑 ID: {uid}")
     try:
         res = requests.get(RAW_LINK, timeout=10).text
         if uid in res:
-            print(f"{G}✅ Access Granted!{W}")
-            show_menu()
-            opt = input(f"{C}root@x-sniper:~# {W}")
+            slow_print(f"{G}✅ ACCESS GRANTED! Welcome, Commander.{W}")
+            opt = input(f"\n{C}root@x-sniper:~# {W}").strip()
             if opt == '1': return True
+            elif opt == '3':
+                print(f"{Y}Updating...{W}")
+                os.system('git pull')
+                sys.exit()
             else: sys.exit()
         else:
-            print(f"{R}❌ Access Denied!{W}\nID: {uid}")
+            print(f"{R}❌ ACCESS DENIED! Contact Admin.{W}")
             sys.exit()
     except: sys.exit()
 
 if not verify(): sys.exit()
 
-# --- ⚙️ ইঞ্জিন সেটআপ ---
+# --- ⚙️ কনফিগ ও ইঞ্জিন ---
 API_ID, API_HASH = 30150082, 'd80dc83628969f279e4d1fde7599283e'
 client = TelegramClient('sniper_session', API_ID, API_HASH)
 target_bin = target_bal = None
@@ -66,20 +85,20 @@ async def cmd(e):
             _, b, bal, w = t.split()
             target_bin, target_bal, wait_seconds = b, bal, int(w)
             stop_flag = False
-            print(f"{G}🎯 Target Set: {b} | {bal}{W}")
-        except: print(f"{R}Error: buy bin bal wait{W}")
+            print(f"{G}🎯 TARGET LOCKED: {b} | Bal: {bal}{W}")
+        except: print(f"{R}❌ Error! Correct: buy bin bal wait{W}")
     elif t == "confirm":
-        print(f"{Y}⏳ Waiting {wait_seconds}s...{W}")
+        print(f"{Y}⏳ Waiting {wait_seconds}s for Refresh...{W}")
         await asyncio.sleep(wait_seconds)
         is_attacking = True
-        print(f"{R}🚀 ATTACK STARTED!{W}")
+        print(f"{R}🚀 ENGINE ACTIVATED!{W}")
 
 @client.on(events.NewMessage(chats='XPrepaidsExchangeBot'))
 @client.on(events.MessageEdited(chats='XPrepaidsExchangeBot'))
 async def handler(e):
     global is_attacking
     if stop_flag or not is_attacking or not e.message.buttons: return
-    if "Main Listings" not in e.message.text and "Total Cards" not in e.message.text: return
+    if "Main Listings" not in e.message.text: return
     
     msg = e.message
     if not target_bin or not target_bal: return
@@ -89,21 +108,16 @@ async def handler(e):
     BAD = ["🅶", "🅿️", "🔄", "used", "relister"]
     btn_to_click = None
 
-    # --- 🔥 ROW-BASED LASER MATCHING (100% Safe) ---
+    # --- 🔥 ROW-BASED ACCURATE MATCHING ---
     for row in msg.buttons:
-        # বর্তমান Row-এর সব টেক্সট চেক করা
         for i, b in enumerate(row):
             txt = b.text.lower()
-            
             if t_bin in txt:
                 if any(x in txt for x in BAD): continue
                 
-                # ব্যালেন্স ম্যাচিং
                 nums = [round(float(n), 2) for n in re.findall(r"\d+\.\d+", txt)]
                 if any(abs(n - target_balance) <= 0.01 for n in nums):
-                    print(f"{G}🎯 PERFECT ROW MATCH: {b.text}{W}")
-                    
-                    # ওই একই Row-তে Purchase বাটন খোঁজা
+                    print(f"{G}🎯 PERFECT MATCH: {b.text}{W}")
                     for pb in row:
                         if "purchase" in pb.text.lower():
                             btn_to_click = pb
@@ -111,32 +125,27 @@ async def handler(e):
                     if btn_to_click: break
         if btn_to_click: break
 
-    # --- ⚡ EXECUTION ---
+    # --- ⚡ INSTANT EXECUTION ---
     if btn_to_click:
         async with click_lock:
-            print(f"{R}🔥 TARGET LOCKED!{W}")
+            print(f"{R}🔥 TARGET LOCKED! CLICKING...{W}")
             for _ in range(2):
                 await btn_to_click.click()
-                await asyncio.sleep(0.1)
-        print(f"{G}✅ SUCCESS!{W}")
+                await asyncio.sleep(0.05) # Optimized Latency
+        print(f"{G}✅ MISSION ACCOMPLISHED!{W}")
         is_attacking = False
     else:
-        # নেভিগেশন ও রিফ্রেশ
         flat = [b for r in msg.buttons for b in r]
-        next_btn = next((b for b in flat if "Next" in b.text or "▶️" in b.text), None)
+        next_btn = next((b for b in flat if any(k in b.text for k in ["Next", "▶️"])), None)
         if next_btn:
-            print(f"{C}⏭️ Next Page...{W}")
             await next_btn.click()
         else:
             ref = next((b for b in flat if any(k in b.text for k in ["Refresh", "🔄", "Reload"])), None)
-            if ref: 
-                await asyncio.sleep(random.uniform(0.1, 0.3))
-                await ref.click()
+            if ref: await ref.click()
 
 async def main():
     await client.start()
-    print(f"{G}🤖 Sniper v3.0 Master Engine Live.{W}")
+    print(f"\n{G}🤖 X-Sniper v3.0 Master Engine is Online.{W}")
     await client.run_until_disconnected()
 
-if __name__ == "__main__":
-    client.loop.run_until_complete(main())
+client.loop.run_until_complete(main())
