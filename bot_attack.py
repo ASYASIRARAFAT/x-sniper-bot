@@ -5,50 +5,42 @@ import sys
 import os
 import requests
 from telethon import TelegramClient, events, errors
-
-
-
 import os
 
-# টার্মিনাল কালার কোড
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-RED = '\033[91m'
-CYAN = '\033[96m'
-WHITE = '\033[0m'
-BOLD = '\033[1m'
+# --- 🎨 ANSI কালার প্যালেট ---
+G = '\033[92m'  # Green
+Y = '\033[93m'  # Yellow
+R = '\033[91m'  # Red
+C = '\033[96m'  # Cyan
+W = '\033[0m'   # White
+B = '\033[1m'   # Bold
 
+# --- 🖼️ প্রফেশনাল ব্যানার ফাংশন ---
 def show_banner():
-    os.system('clear') # স্ক্রিন পরিষ্কার করবে
+    os.system('clear')
     banner = f"""
-{CYAN}{BOLD}
-  __   __      _____ _   _ _____ _____  ______ _____  
-  \ \ / /     / ____| \ | |_   _|  __ \|  ____|  __ \ 
-   \ V /_____| (___ |  \| | | | | |__) | |__  | |__) |
-    > <______|  ___\| . ` | | | |  ___/|  __| |  _  / 
-   / ^ \     |____  | |\  |_| |_| |    | |____| | \ \ 
-  /_/ \_\    |_____/|_| \_|_____|_|    |______|_|  \_\
+{C}{B}  __  __      _____ _   _ _____ _____  ______ _____  
+  \ \/ /     / ____| \ | |_   _|  __ \|  ____|  __ \ 
+   \  /_____| (___ |  \| | | | | |__) | |__  | |__) |
+   /  \______|___ \| . ` | | | |  ___/|  __| |  _  / 
+  / /\ \     ____) | |\  |_| |_| |    | |____| | \ \ 
+ /_/  \_\   |_____/|_| \_|_____|_|    |______|_|  \_\
                                                       
-{YELLOW}         [+] Version: 2.0 | Powered by YASIR ARAFAT [+]
-{GREEN}         [+] Developer: ASYASIRARAFAT           [+]
-{CYAN}=============================================================
-|               {WHITE}Welcome to High-Speed Sniper Tool{CYAN}           |
+{Y}        [+] Version: 2.0 | High Speed Snipping [+]
+{G}        [+] Developer: ASYASIRARAFAT           [+]
+{C}=============================================================
+|               {W}PREMIUM TELEGRAM SNIPER TOOL{C}                |
 =============================================================
     """
     print(banner)
 
 def show_menu():
-    print(f"{GREEN}[ 1 ] {WHITE}Start Sniper Attack")
-    print(f"{GREEN}[ 2 ] {WHITE}Update Tool")
-    print(f"{GREEN}[ 3 ] {WHITE}Check My HWID")
-    print(f"{GREEN}[ 4 ] {WHITE}Contact Admin")
-    print(f"{RED}[ X ] {WHITE}Exit Bot")
-    print(f"{CYAN}============================================================={WHITE}\n")
-
-# --- এটি আপনার verify_user() ফাংশনের ঠিক আগে কল করুন ---
-show_banner()
-show_menu()
-
+    print(f"{G}[ 1 ] {W}Start Sniper Attack")
+    print(f"{G}[ 2 ] {W}Check Hardware ID (HWID)")
+    print(f"{G}[ 3 ] {W}Update Tool (Git Pull)")
+    print(f"{G}[ 4 ] {W}About Developer")
+    print(f"{R}[ X ] {W}Exit Tool")
+    print(f"{C}-------------------------------------------------------------{W}")
 
 
 
