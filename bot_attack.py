@@ -133,14 +133,7 @@ async def handler(e):
                 await asyncio.sleep(0.05) # Optimized Latency
         print(f"{G}✅ MISSION ACCOMPLISHED!{W}")
         is_attacking = False
-    else:
-        flat = [b for r in msg.buttons for b in r]
-        next_btn = next((b for b in flat if any(k in b.text for k in ["Next", "▶️"])), None)
-        if next_btn:
-            await next_btn.click()
-        else:
-            ref = next((b for b in flat if any(k in b.text for k in ["Refresh", "🔄", "Reload"])), None)
-            if ref: await ref.click()
+    
 
 async def main():
     await client.start()
