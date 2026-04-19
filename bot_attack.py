@@ -6,6 +6,52 @@ import os
 import requests
 from telethon import TelegramClient, events, errors
 
+
+
+import os
+
+# টার্মিনাল কালার কোড
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RED = '\033[91m'
+CYAN = '\033[96m'
+WHITE = '\033[0m'
+BOLD = '\033[1m'
+
+def show_banner():
+    os.system('clear') # স্ক্রিন পরিষ্কার করবে
+    banner = f"""
+{CYAN}{BOLD}
+  __   __      _____ _   _ _____ _____  ______ _____  
+  \ \ / /     / ____| \ | |_   _|  __ \|  ____|  __ \ 
+   \ V /_____| (___ |  \| | | | | |__) | |__  | |__) |
+    > <______|  ___\| . ` | | | |  ___/|  __| |  _  / 
+   / ^ \     |____  | |\  |_| |_| |    | |____| | \ \ 
+  /_/ \_\    |_____/|_| \_|_____|_|    |______|_|  \_\
+                                                      
+{YELLOW}         [+] Version: 2.0 | Powered by YASIR ARAFAT [+]
+{GREEN}         [+] Developer: ASYASIRARAFAT           [+]
+{CYAN}=============================================================
+|               {WHITE}Welcome to High-Speed Sniper Tool{CYAN}           |
+=============================================================
+    """
+    print(banner)
+
+def show_menu():
+    print(f"{GREEN}[ 1 ] {WHITE}Start Sniper Attack")
+    print(f"{GREEN}[ 2 ] {WHITE}Update Tool")
+    print(f"{GREEN}[ 3 ] {WHITE}Check My HWID")
+    print(f"{GREEN}[ 4 ] {WHITE}Contact Admin")
+    print(f"{RED}[ X ] {WHITE}Exit Bot")
+    print(f"{CYAN}============================================================={WHITE}\n")
+
+# --- এটি আপনার verify_user() ফাংশনের ঠিক আগে কল করুন ---
+show_banner()
+show_menu()
+
+
+
+
 # --- 🔐 সিকিউরিটি ও অ্যাপ্রুভাল সিস্টেম ---
 # আপনার গিটহাবের RAW লিঙ্ক এবং ফেসবুক লিঙ্ক
 RAW_LINK = "https://raw.githubusercontent.com/ASYASIRARAFAT/x-sniper-bot/main/approved.txt"
