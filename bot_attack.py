@@ -57,18 +57,32 @@ def verify_user():
 def load_config():
     if os.path.exists("config.txt"):
         with open("config.txt", "r") as f:
-            lines = f.read().splitlines()
-            if len(lines) >= 2: return int(lines[0]), lines[1]
+            lines = [line.strip() for line in f.readlines() if line.strip()]
+            if len(lines) >= 2:
+                try:
+                    return int(lines[0]), lines[1]
+                except ValueError:
+                    log("Invalid data in config.txt! Re-configuring...", "error")
     
     ui_header()
     log("Configuration not found! Enter API details:", "wait")
-    api_id = input(f"{C}Enter API ID: {W}").strip()
-    api_hash = input(f"{C}Enter API Hash: {W}").strip()
+    
+    # ইনপুট নেওয়ার সময় strip() ব্যবহার করা হয়েছে যাতে স্পেস না থাকে
+    api_id_input = input(f"{C}Enter API ID: {W}").strip()
+    api_hash_input = input(f"{C}Enter API Hash: {W}").strip()
+    
     with open("config.txt", "w") as f:
-        f.write(f"{api_id}\n{api_hash}")
-    return int(api_id), api_hash
+        f.write(f"{api_id_input}\n{api_hash_input}")
+    
+    return int(api_id_input), api_hash_input
 
-API_ID, API_HASH = load_config()
+# কনফিগারেশন লোড করা হচ্ছে
+try:
+    API_ID, API_HASH = load_config()
+except ValueError:
+    log("API ID অবশ্যই একটি সংখ্যা হতে হবে!", "error")
+    exit()
+
 BOT = 'XPrepaidsExchangeBot'
 client = TelegramClient('v21_session', API_ID, API_HASH)
 
