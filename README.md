@@ -3,8 +3,8 @@ pkg update && pkg upgrade -y
 
 pkg install python git -y
 
-git clone https://github.com/ASYASIRARAFAT/x-sniper-advance
+https://github.com/ASYASIRARAFAT/x-sniper-bot.git
 
-cd x-sniper-advance
+cd x-sniper-bot
 
 pip install telethon requests
